@@ -21,7 +21,7 @@ exports.createSauce = (req, res, next) => {
 
 exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ? {
-        ...JSON.parse(req.body.thing),
+        ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
 
@@ -60,18 +60,14 @@ exports.deleteSauce = (req, res, next) => {
         });
 };
 
-exports.getOneSauce = (req, res, next) => {
+exports.getSauceById = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(404).json({ error }));
 };
 
-exports.getAllSauces = (req, res, next) => {
+exports.getSauces = (req, res, next) => {
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
         .catch(error => res.status(400).json({ error }));
-};
-
-exports.likeSauce = (req, res, next) => {
-
 };
