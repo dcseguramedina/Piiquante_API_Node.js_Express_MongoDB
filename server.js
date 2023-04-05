@@ -1,9 +1,9 @@
-//Import the native HTTP package from Node 
+// Import the native HTTP package from Node 
 const http = require('http');
-//Import the express application
+// Import the express application
 const app = require('./app');
 
-//Add normalizePort function to return a valid port (whether provided as a number or string)
+// Add normalizePort function to return a valid port (provided as a number or string)
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -18,7 +18,7 @@ const normalizePort = val => {
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-//Add errorHandler function to look for different errors and handles them appropriately
+// Add errorHandler function to look for different errors and handles them appropriately
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error;
@@ -39,10 +39,10 @@ const errorHandler = error => {
   }
 };
 
-//Use the createServer() method to create an HTTP server 
+// Use the createServer() method to create an HTTP server 
 const server = http.createServer(app);
 
-//Use a listener to logg the port or named pipe on which the server runs in the console
+// Use a listener to log the port or named pipe on which the server runs in the console
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();
@@ -50,5 +50,5 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
-//Use server.listen() method to listen on the specified port or path
+// Use server.listen() method to listen to the specified port or path
 server.listen(port);

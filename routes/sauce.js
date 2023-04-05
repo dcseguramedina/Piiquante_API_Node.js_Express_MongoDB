@@ -1,19 +1,19 @@
-//Import the main express module from the express package
+// Import the main module from express package
 const express = require('express');
 
-//Import the authorization and multer middlewares  
+// Import authorization and multer middlewares  
 const auth = require('../middlewares/auth');
 const multer = require('../middlewares/multer-config');
 
-//Use the express.Router method to create an express router  
+// Create express.Router  
 const router = express.Router();
 
-//Import the sauce controllers
+// Import sauce controller
 const sauceCtrl = require('../controllers/sauce');
 
-//Define the routing managers for the sauce routes
-//Pass the authotization middleware as a second argument of the routes to protect
-//Pass the multer middleware after the authorization one in order to authenticate the image files
+// Define the sauce routes
+// Declare authorization middleware as a second argument of routes
+// Declare multer middleware after authorization in order to authenticate image files
 router.post('/', auth, multer, sauceCtrl.createSauce);
 router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 router.delete('/:id', auth, sauceCtrl.deleteSauce);
@@ -21,5 +21,5 @@ router.get('/:id', auth, sauceCtrl.getSauceById);
 router.get('/', auth, sauceCtrl.getSauces);
 router.post('/:id/like', auth, sauceCtrl.likeDislikeSauce);
 
-//Export the router in order to make it available for the express application
+// Export router in order to make it available to the express application
 module.exports = router;
